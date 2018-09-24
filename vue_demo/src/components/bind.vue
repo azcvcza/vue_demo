@@ -10,7 +10,6 @@ export default {
   data : () => {
     return {
       msg : 'to use router',
-      
     }
   }
 }
@@ -18,5 +17,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.bind{
+    background-color:#58a;
+}
 </style>
