@@ -13,6 +13,9 @@
     <div id="app">
         <h1>{{message}}</h1>
         <button v-on:click="console">click to console</button>
+        <p>{{firstName}}</p>
+        <p>{{lastName}}</p>
+        <p>{{fullName}}</p>
     </div>
 </body>
 <script>
@@ -20,7 +23,9 @@
         el: '#app',
         data: function () {
             return {
-                message: 'helloworld'
+                message: 'helloworld',
+                firstName:'fuck',
+                lastName:'bitch',
             }
         },
         methods: {
@@ -28,6 +33,11 @@
                 console.log('button click')
             }
         },
+        computed:{
+            fullName:function(){
+                return this.firstName +" "+this.lastName
+            }
+        }
     })
 </script>
 
