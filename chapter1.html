@@ -26,6 +26,7 @@
                 message: 'helloworld',
                 firstName:'fuck',
                 lastName:'bitch',
+                cents:100
             }
         },
         methods: {
@@ -36,6 +37,14 @@
         computed:{
             fullName:function(){
                 return this.firstName +" "+this.lastName
+            },
+            price:{
+                set : function(newValue){
+                    this.cents = newValue*100;
+                },
+                get : function(){
+                    console.log("cents is",(this.cents/100).toFixed(2));
+                }
             }
         }
     })
