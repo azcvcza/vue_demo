@@ -57,6 +57,8 @@
         <div v-pre>{{umcompiled}}</div>
         <br>
         <div v-my-msg:console.log="content"></div>
+        <br>
+        <input type="text" v-my-two-way-directive="param">
     </div>
 </body>
 <script>
@@ -76,8 +78,22 @@
             window[this.arg][keys[0]](newValue);
         },
         unbind:function(){
-            
+
         }
+    });
+    Vue.directive('my-twoway-directive',{
+        twoWay:true,
+        bind:function(){
+            this.handler=function(){
+                console.log("value changed:",this.el.value);
+                this.set(this.el.value)
+            }.bind(this)
+            this.el.addEventListener("input",this.handler)
+        },
+        unbind:function(){
+            this.el.removeEventListener("input",this.handler);
+        }
+
     })
     var vue = new Vue({
         el: '#app',
@@ -106,6 +122,7 @@
                 },
                 uncompiled:'there is a uncomplied element',
                 content:"this is the content",
+                params:"first",
             }
         },
         methods: {
