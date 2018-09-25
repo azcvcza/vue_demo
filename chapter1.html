@@ -51,9 +51,16 @@
         <form v-on:submit.prevent="onSubmit"></form><!--阻止表单默认提交-->
         <form v-on:submit.stop.prevent="onSubmit"></form><!--阻止默认提交事件-->
         <form v-on:submit.stop.prevent=></form><!--空白也行-->
+        <br>
+        <span v-text="msg"></span><!--在beforeComplie时候不会看到模型名字-->
+        <div v-el:app></div>
+        <div v-pre>{{umcompiled}}</div>
+        <br>
+        <div v-my-advance-directive a="paramA"></div>
     </div>
 </body>
 <script>
+    
     var vue = new Vue({
         el: '#app',
         data: function () {
@@ -78,7 +85,8 @@
                     a:"a-value",
                     b:"b-value",
                     c:"c-value",
-                }
+                },
+                uncompiled:'there is a uncomplied element'
             }
         },
         methods: {
@@ -98,6 +106,11 @@
                     console.log("cents is",(this.cents/100).toFixed(2));
                 }
             }
+        }
+    }).directive('myadvance-directive',{
+        params:['a'],
+        bind:function(){
+            console.log("params",this.params)
         }
     })
 </script>
