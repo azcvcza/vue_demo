@@ -56,11 +56,29 @@
         <div v-el:app></div>
         <div v-pre>{{umcompiled}}</div>
         <br>
-        <div v-my-advance-directive a="paramA"></div>
+        <div v-my-msg:console.log="content"></div>
     </div>
 </body>
 <script>
-    
+    Vue.directive('my-msg',{
+        bind:function(){
+            console.log("____bind_____");
+            console.log('el',this.el);
+            console.log('name',this.name);
+            console.log('vm',this.vm);
+            console.log("expression",this.expression);
+            console.log("arg",this.arg);
+            console.log("modifier",this.modifier);
+            console.log("descriptor",this.descriptor);
+        },
+        update: function(newValue,oldValue){
+            var keys = Object.keys(this.modifier);
+            window[this.arg][keys[0]](newValue);
+        },
+        unbind:function(){
+            
+        }
+    })
     var vue = new Vue({
         el: '#app',
         data: function () {
@@ -86,7 +104,8 @@
                     b:"b-value",
                     c:"c-value",
                 },
-                uncompiled:'there is a uncomplied element'
+                uncompiled:'there is a uncomplied element',
+                content:"this is the content",
             }
         },
         methods: {
@@ -106,11 +125,6 @@
                     console.log("cents is",(this.cents/100).toFixed(2));
                 }
             }
-        }
-    }).directive('myadvance-directive',{
-        params:['a'],
-        bind:function(){
-            console.log("params",this.params)
         }
     })
 </script>
