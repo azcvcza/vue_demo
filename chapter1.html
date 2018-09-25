@@ -16,6 +16,28 @@
         <p>{{firstName}}</p>
         <p>{{lastName}}</p>
         <p>{{fullName}}</p>
+        <input type="text" v-model="msg">
+        <span>your input is {{msg}}</span>
+        <label for="man">man<input name="man" type="radio" value="male" v-model="gender"></label>
+        <label for="woman">woman<input type="radio" name="woman" value="female" v-model="gender"></label>
+        <p>{{gender}}</p>
+        <input type="checkbox" v-model="checked"><span>checked:{{checked}}</span>
+        <label for="">1<input type="checkbox" value="1" v-model="multiChecked"></label>
+        <label for="">2<input type="checkbox" value="2" v-model="multiChecked"></label>
+        <label for="">3<input type="checkbox" value="3" v-model="multiChecked"></label>
+        <p>multichecked :{{multiChecked.join("|")}}</p>
+        <select name="" id="" v-model="selected">
+            <option value="A" selected>A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <span>slelected:{{selected}}</span>
+        <select name="" id="" v-model="multiSelected" multiple>
+            <option value="A" selected>A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <span>Multiselected: {{multiSelected.join("|")}}</span>
     </div>
 </body>
 <script>
@@ -26,7 +48,13 @@
                 message: 'helloworld',
                 firstName:'fuck',
                 lastName:'bitch',
-                cents:100
+                cents:100,
+                msg:"",
+                gender:"",
+                checked:"",
+                multiChecked:[],
+                selected:"",
+                multiSelected:[],
             }
         },
         methods: {
