@@ -11,6 +11,12 @@
 
 <body>
     <div id="app">
+        <ul>
+            <li v-for="item in items">
+                <h3>{{item.title}}</h3>
+                <p>{{item.description}}</p>
+            </li>
+        </ul>
         <h1>{{message}}</h1>
         <button v-on:click="console">click to console</button>
         <p>{{firstName}}</p>
@@ -55,6 +61,12 @@
                 multiChecked:[],
                 selected:"",
                 multiSelected:[],
+                items:[
+                    {title:'title-1',description:'description-1'},
+                    {title:'title-2',description:'description-2'},
+                    {title:'title-3',description:'description-3'},
+                    {title:'title-4',description:'description-4'},
+                ]
             }
         },
         methods: {
