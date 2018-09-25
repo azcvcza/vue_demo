@@ -59,6 +59,8 @@
         <div v-my-msg:console.log="content"></div>
         <br>
         <input type="text" v-my-two-way-directive="param">
+        <br>
+        <div>{{date|date}}</div>
     </div>
 </body>
 <script>
@@ -95,6 +97,10 @@
         }
 
     })
+    Vue.filter('date',function(value){
+        if(!value instanceof Date){ return value}
+        return value;
+    })
     var vue = new Vue({
         el: '#app',
         data: function () {
@@ -123,6 +129,7 @@
                 uncompiled:'there is a uncomplied element',
                 content:"this is the content",
                 params:"first",
+                date:new Date(),
             }
         },
         methods: {
