@@ -9,11 +9,64 @@
 <script src="js/vue.js"></script>
 <body>
     <div id="app">
-        
+        <input type="text" v-model="content">
+        <button @click="addTodo">添加</button>
+        <button @click="broadcast">广播</button>
+        <child-todo name="one"></child-todo>
+        <child-todo name="two"></child-todo>
+        <ul>
+            <li v-for="value in todo">{{value}}</li>
+        </ul>
     </div>
 </body>
 <script>
     
-    
+    Vue.component('child-todo',{
+        props:['name'],
+        data:function(){
+            return {
+                content:""
+            }
+        },
+        template:'<div>\
+        child {{name}}\
+        <input type="text" v-model="content">\
+        <button @click="add">add</button>\
+        </div>',
+        methods:{
+            add:function(){
+                this.$dispatch('add',"child:"+this.name+" :"+this.content);
+                this.content="";
+            }
+        },
+        events:{
+            'to-child':function(msg){
+                this.$dispatch('add','child'+this.name+": "+msg);
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            todo:[],
+            content:'',
+        },
+        methods:{
+            addTodo:function(){
+                this.$emit('add','parent'+this.content);
+                this.content="";
+            },
+            broadcast:function(){
+                this.$broadcast('to-child',this.content);
+                this.content="";
+            }
+        },
+        events:{
+            "add":function(msg){
+                this.todo.push(msg);
+            }
+        }
+    })
 </script>
 </html>
