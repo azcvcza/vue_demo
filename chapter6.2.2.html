@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件与分发(组件props)</title>
+</head>
+<script src="js/vue.js"></script>
+<body>
+    <div id="app">
+        <input type="text" v-model="message">
+        <my-component v-bind:message="message"></my-component>
+    </div>
+</body>
+<script>
+    var MyComponent = Vue.extend({
+        props:['message'],
+        template:"<p>{{'from parent:'+message}}</p>"
+    })
+    Vue.component('my-component',MyComponent)
+    var vm = new Vue(
+        {
+            el:'#app',
+            data:{
+                message:'default'
+            }
+        }
+    )
+</script>
+</html>
