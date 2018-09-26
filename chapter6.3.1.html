@@ -35,13 +35,13 @@
         </div>',
         methods:{
             add:function(){
-                this.$dispatch('add',"child:"+this.name+" :"+this.content);
+                this.$emit('add',"child:"+this.name+" :"+this.content);
                 this.content="";
             }
         },
         events:{
             'to-child':function(msg){
-                this.$dispatch('add','child'+this.name+": "+msg);
+                this.$emit('add','child'+this.name+": "+msg);
             }
         }
     });
@@ -55,10 +55,11 @@
         methods:{
             addTodo:function(){
                 this.$emit('add','parent'+this.content);
+                console.log("add to do",this.content)
                 this.content="";
             },
             broadcast:function(){
-                this.$broadcast('to-child',this.content);
+                this.$emit('to-child',this.content);
                 this.content="";
             }
         },
