@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件</title>
+</head>
+<script src="js/vue.js"></script>
+<style>
+    .tab-button {
+  padding: 6px 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 40px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #f0f0f0;
+  margin-bottom: -1px;
+  margin-right: -1px;
+}
+.tab-button:hover {
+  background: #58a;
+}
+.tab-button.active {
+  background: #58a;
+}
+.tab {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+</style>
+<body>
+
+    <div id="dynamic-component-demo" class="demo">
+        <button v-for="tab in tabs" v-bind:key="tab.name" v-bind:class="['tab-button', { active: currentTab.name === tab.name }]"
+            v-on:click="currentTab = tab">{{ tab.name }}</button>
+
+        <component v-bind:is="currentTab.component" class="tab"></component>
+    </div>
+</body>
+<script>
+   
+    var tabs = [{
+            name: 'Home',
+            component: {
+                template: '<div>Home component</div>'
+            }
+        },
+        {
+            name: 'Posts',
+            component: {
+                template: '<div>Posts component</div>'
+            }
+        },
+        {
+            name: 'Archive',
+            component: {
+                template: '<div>Archive component</div>',
+            }
+        }
+    ]
+
+    new Vue({
+        el: '#dynamic-component-demo',
+        data: {
+            tabs: tabs,
+            currentTab: tabs[0]
+        }
+    })
+</script>
+
+</html>
